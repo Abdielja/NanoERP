@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd" >
 
 
 	<!-- Core Module -->
+	
+<!-- 
+	<context:property-placeholder 
+		location="application.properties" 
+		ignore-unresolvable="true"
+	/>	
+-->
+	<!-- ***** BEGIN: NanoERP Application Settings Bean ***** -->
+
+<!-- 
+	<bean id="appSettings" class="com.asi.driver.config.AppSettings"> 
+	  <property name="companyName" value="${company.name}"/> 
+	  <property name="port" value="${tcp.port}"/>
+	  <property name="encryptionAlgorithm" value="${encryption.algorithm}"/> 
+	  <property name="encryptionMode" value="${encryption.operation-mode}"/> 
+	  <property name="encryptionPadding" value="${encryption.padding}"/> 
+	</bean>
+ -->	
+	<!-- ***** END: SCII Application Settings Bean ***** -->
 	
 	
 </beans>

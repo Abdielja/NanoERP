@@ -39,19 +39,19 @@ public class Main
       Account acc = accountingService.getAllAccounts().get(i);
       System.out.println("Account: " + acc.getNumber() + " - " + acc.getName());
     }
-    
+   
     System.out.println("\n----- Entries -----\n");
     for(int i=0; i < accountingService.getAllEntries().size(); i++)
     {
       Entry entry = accountingService.getAllEntries().get(i);
       System.out.println("Account: " + entry.getAccount().getName() + " - " + entry.getTrxType() + " " + entry.getAmount());
     }
-    
+   
   }
   
   public ApplicationContext loadContext()
   {
-    ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"core-context.xml", "accounting-context.xml"});
+    ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"database-context.xml"});
     return context;
   }
 

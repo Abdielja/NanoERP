@@ -5,6 +5,11 @@ package org.nano.accounting.repository;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Query;
 
 import org.nano.accounting.model.Entry;
 
@@ -15,7 +20,19 @@ import org.nano.accounting.model.Entry;
 public class EntryRepository implements IEntryRepository
 {
 
-  private ArrayList<Entry> entries;
+  // ********** properties **********
+  
+  private SessionFactory sessionFactory;
+		  
+  public void setSessionFactory(SessionFactory sessionFactory) 
+  {
+    this.sessionFactory = sessionFactory;
+  } 
+    
+  private Session currentSession() 
+  {
+    return sessionFactory.getCurrentSession();
+  }
 
     
   public EntryRepository()
@@ -31,21 +48,39 @@ public class EntryRepository implements IEntryRepository
 
   private void loadEntriesFromXML(String fileName)
   {
-    entries = new ArrayList<Entry>();    
   }
   
   
   @Override
   public ArrayList<Entry> getAllEntries()
   {
-    // TODO Auto-generated method stub
-    return null;
+
+	Query query = currentSession().createQuery("FROM Entry");
+    
+    @SuppressWarnings("unchecked")
+	ArrayList<Entry> entries = (ArrayList<Entry>)query.list();
+
+    return entries;
   }
 
+  public ArrayList<Entry> getByUserOidWithinDateRange(long userOid, Date startDate, Date endDate)
+  {
+    
+    Query query = currentSession().createQuery("FROM Entry WHERE creationDate >= :startDate AND creationDate <= :endDate");
+    
+    query.setParameter("startDate", startDate);
+    query.setParameter("endDate", endDate);
+    
+    @SuppressWarnings("unchecked")
+	ArrayList<Entry> entries = (ArrayList<Entry>)query.list();
+
+    return entries;
+  }
+  
   @Override
   public long createEntry(Entry entry)
   {
-    entries.add(entry);
+    //entries.add(entry);
     return 0;
   }
 

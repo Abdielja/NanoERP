@@ -1,7 +1,9 @@
 alter table entry add description varchar(100)
+ALTER TABLE entry ALTER COLUMN cration_date RENAME TO creation_date
 
 insert into entry values(null,'2015-09-07', 430, 25.0, 1)
 insert into entry values(null,'2015-09-08', 210, 3, 2, 'Eduardo solicito 3 para brocha')
 
 select sum(amount) from entry where entry_type = 1
 select sum(amount) from entry where entry_type = 2
+

@@ -2,10 +2,22 @@ package org.nano.accounting.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="entry")
 public class Entry
 {
 
-  /*
+
+/*
    * Constants
    */
   public static final int TYPE_CREDIT = 1;
@@ -24,6 +36,10 @@ public class Entry
   /*
    * Getters and Setters
    */
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name="oid")
   public long getOid()
   {
     return oid;
@@ -34,6 +50,7 @@ public class Entry
     this.oid = oid;
   }
 
+  @Column(name="creation_date")
   public Date getCreationDate()
   {
     return creationDate;
@@ -44,6 +61,7 @@ public class Entry
     this.creationDate = creationDate;
   }
 
+  @Column(name="entry_type")
   public int getTrxType()
   {
     return trxType;
@@ -54,6 +72,8 @@ public class Entry
     this.trxType = trxType;
   }
 
+  @ManyToOne
+  @JoinColumn(name = "account_oid")
   public Account getAccount()
   {
     return account;
@@ -64,6 +84,7 @@ public class Entry
     this.account = account;
   }
 
+  @Column(name="amount")
   public double getAmount()
   {
     return amount;
@@ -74,6 +95,7 @@ public class Entry
     this.amount = amount;
   }
   
+  @Column(name="description")
   public String getDescription()
   {
     return description;
@@ -84,6 +106,7 @@ public class Entry
     this.description = description;
   }
 
+  
   /*
    * Constructors
    */

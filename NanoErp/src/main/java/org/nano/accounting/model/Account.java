@@ -5,10 +5,20 @@ package org.nano.accounting.model;
 
 import java.util.ArrayList;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
- * @author Abdiel
+ * @author Abdiel Jaramillo
  *
  */
+
+@Entity
+@Table(name="account")
 public class Account
 {
 
@@ -29,6 +39,14 @@ public class Account
   private String name;
   private int accType;
   
+
+  /*
+   * Getters and Setters
+   */
+
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name="oid")
   public long getOid()
   {
     return oid;
@@ -39,6 +57,7 @@ public class Account
     this.oid = oid;
   }
 
+  @Column(name="number")
   public String getNumber()
   {
     return number;
@@ -49,6 +68,7 @@ public class Account
     this.number = number;
   }
 
+  @Column(name="name")
   public String getName()
   {
     return name;
@@ -60,6 +80,7 @@ public class Account
   }
   
   
+  @Column(name="acc_type")
   public int getAccType()
   {
     return accType;
@@ -69,6 +90,11 @@ public class Account
   {
     this.accType = accType;
   }
+
+
+  /*
+   * Constructors
+   */
 
   public Account()
   {

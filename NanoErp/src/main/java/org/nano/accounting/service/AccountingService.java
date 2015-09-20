@@ -9,6 +9,7 @@ import org.nano.accounting.model.Account;
 import org.nano.accounting.model.Entry;
 import org.nano.accounting.repository.IAccountRepository;
 import org.nano.accounting.repository.IEntryRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Abdiel
@@ -32,16 +33,19 @@ public class AccountingService
   
   
   
+  @Transactional
   public long createAccount(Account account)
   {
     return accountRepository.createAccount(account);
   }
 
+  @Transactional
   public ArrayList<Account> getAllAccounts()
   {
     return accountRepository.getAllAccounts();
   }
     
+  @Transactional
   public ArrayList<Entry> getAllEntries()
   {
     return entryRepository.getAllEntries();

@@ -5,6 +5,8 @@ package org.nano.accounting.repository;
 
 import java.util.ArrayList;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.nano.accounting.model.Account;
 
 /**
@@ -14,9 +16,22 @@ import org.nano.accounting.model.Account;
 public class AccountRepository implements IAccountRepository
 {
 
-  private ArrayList<Account> accounts;
+  // ********** properties **********
   
-    
+  private SessionFactory sessionFactory;
+	  
+
+  public void setSessionFactory(SessionFactory sessionFactory) 
+  {
+    this.sessionFactory = sessionFactory;
+  } 
+
+  private Session currentSession() 
+  {
+    return sessionFactory.getCurrentSession();
+  }
+
+  
   public AccountRepository()
   {
     
@@ -28,17 +43,15 @@ public class AccountRepository implements IAccountRepository
   }
   
 
-  
   @Override
   public ArrayList<Account> getAllAccounts()
   {
-    return accounts;
+    return new ArrayList<Account>();
   }
   
   @Override
   public long createAccount(Account account)
   {
-    accounts.add(account);
     return 0;
   }
   
@@ -48,11 +61,9 @@ public class AccountRepository implements IAccountRepository
     return null;
   }
   
-  
-  
+    
   private void loadAccountsFromXML(String fileName)
   {
-    accounts = new ArrayList<Account>();
 
   }
   
