@@ -22,4 +22,5 @@ public interface IEntryRepository
   
   public ArrayList<Entry> getEntriesByDateRange(Date fromDate, Date toDate);
   
+  public void save(Entry entry);
 }

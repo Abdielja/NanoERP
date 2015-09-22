@@ -90,6 +90,12 @@ public class EntryRepository implements IEntryRepository
     // TODO Auto-generated method stub
     return null;
   }
+
+@Override
+public void save(Entry entry) {
+	// TODO Auto-generated method stub
+	
+}
      
 
 }
