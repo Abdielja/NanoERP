@@ -5,9 +5,11 @@ package org.nano.accounting.repository;
 
 import java.util.ArrayList;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.nano.accounting.model.Account;
+import org.nano.accounting.model.Entry;
 
 /**
  * @author Abdiel Jaramilo Ojedis
@@ -46,7 +48,12 @@ public class AccountRepository implements IAccountRepository
   @Override
   public ArrayList<Account> getAllAccounts()
   {
-    return new ArrayList<Account>();
+	Query query = currentSession().createQuery("FROM Account");
+    
+    @SuppressWarnings("unchecked")
+	ArrayList<Account> accounts = (ArrayList<Account>)query.list();
+
+    return accounts;
   }
   
   @Override

@@ -44,7 +44,7 @@ public class Main
     for(int i=0; i < accountingService.getAllEntries().size(); i++)
     {
       Entry entry = accountingService.getAllEntries().get(i);
-      System.out.println("Account: " + entry.getAccount().getName() + " - " + entry.getTrxType() + " " + entry.getAmount());
+      System.out.println("Entry: " + entry.getAccount().getName() + " - " + entry.getTrxType() + " " + entry.getAmount() + " " + entry.getDescription());
     }
    
   }
