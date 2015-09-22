@@ -50,5 +50,11 @@ public class AccountingService
   {
     return entryRepository.getAllEntries();
   }
-    
+  
+  @Transactional
+  public void saveEntry(Entry entry)
+  {
+    entryRepository.save(entry);
+  }
+  
 }
