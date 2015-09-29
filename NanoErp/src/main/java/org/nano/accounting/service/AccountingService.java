@@ -31,8 +31,6 @@ public class AccountingService
     this.entryRepository = entryRepository;
   }
   
-  
-  
   @Transactional
   public long createAccount(Account account)
   {

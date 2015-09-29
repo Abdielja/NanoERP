@@ -48,10 +48,10 @@ public class AccountRepository implements IAccountRepository
   @Override
   public ArrayList<Account> getAllAccounts()
   {
-	Query query = currentSession().createQuery("FROM Account");
-    
+  	Query query = currentSession().createQuery("FROM Account");
+      
     @SuppressWarnings("unchecked")
-	ArrayList<Account> accounts = (ArrayList<Account>)query.list();
+  	ArrayList<Account> accounts = (ArrayList<Account>)query.list();
 
     return accounts;
   }
@@ -71,7 +71,7 @@ public class AccountRepository implements IAccountRepository
     
   private void loadAccountsFromXML(String fileName)
   {
-
+            
   }
   
 }
