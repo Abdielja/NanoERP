@@ -3,8 +3,6 @@
  */
 package org.nano.accounting.model;
 
-import java.util.ArrayList;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -3,7 +3,6 @@
  */
 package org.nano.ui.console;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 import org.nano.accounting.model.Account;
@@ -22,13 +21,10 @@ public class Console
   
   public Console(AccountingService accountingService)
   {
-    this.accountingService = accountingService;
-    
-    start();
-    
+    this.accountingService = accountingService;  
   }
 
-  private void start()
+  public void start()
   {
     
     Scanner scan = new Scanner(System.in);
@@ -55,7 +51,7 @@ public class Console
         
         case "quit":
           quit = true;
-          System.out.println("Bye.");
+          System.out.println("\nBye.");
           break;
           
         default:

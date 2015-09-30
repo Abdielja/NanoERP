@@ -9,7 +9,6 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.nano.accounting.model.Account;
-import org.nano.accounting.model.Entry;
 
 /**
  * @author Abdiel Jaramilo Ojedis

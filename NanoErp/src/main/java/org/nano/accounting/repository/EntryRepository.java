@@ -6,12 +6,10 @@ package org.nano.accounting.repository;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Query;
-
 import org.nano.accounting.model.Entry;
 
 /**
@@ -74,13 +72,6 @@ public class EntryRepository implements IEntryRepository
     ArrayList<Entry> entries = (ArrayList<Entry>) query.list();
 
     return entries;
-  }
-
-  @Override
-  public long createEntry(Entry entry)
-  {
-    // entries.add(entry);
-    return 0;
   }
 
   @Override

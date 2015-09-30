@@ -4,8 +4,6 @@
 
 package org.nano.core;
 
-import org.nano.accounting.model.Account;
-import org.nano.accounting.model.Entry;
 import org.nano.accounting.service.AccountingService;
 import org.nano.ui.console.Console;
 import org.springframework.context.ApplicationContext;
@@ -18,26 +16,27 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main
 {
 
-  private ApplicationContext context;
-  
+  private ApplicationContext context;  
   private Console console;
+  
+  // *** Application Entry Point ***
   
   /**
    * @param args
    */
   public static void main(String[] args)
   {
-    Main app = new Main();
+    new Main();
   }
 
+  // *** Constructors ***
+  
   public Main()
   {
-    
     context = loadContext();
     AccountingService accountingService = getAccountingService();           
-
     console = new Console(accountingService);
-    
+    console.start();
   }
   
   public ApplicationContext loadContext()
