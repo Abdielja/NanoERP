@@ -64,10 +64,22 @@ public class AccountRepository implements IAccountRepository
   @Override
   public Account getAccount(String number)
   {
-    return null;
+
+    Account account = null;
+    
+    Query query = currentSession().createQuery("FROM Account WHERE number = '" + number + "'");
+    @SuppressWarnings("unchecked")
+    ArrayList<Account> accounts = (ArrayList<Account>)query.list();
+
+    if (accounts.size() > 0)
+    {
+      account = accounts.get(0);
+    }
+    
+    return account;
+    
   }
   
-    
   private void loadAccountsFromXML(String fileName)
   {
             

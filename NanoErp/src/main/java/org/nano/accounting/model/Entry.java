@@ -116,12 +116,13 @@ public class Entry
     
   }
   
-  public Entry(Date creationDate, int trxType, Account account, double amount)
+  public Entry(Date creationDate, int trxType, Account account, double amount, String description)
   {
     this.creationDate = creationDate;
     this.trxType = trxType;
     this.account = account;
     this.amount = amount;
+    this.description = description;
   }
   
 }

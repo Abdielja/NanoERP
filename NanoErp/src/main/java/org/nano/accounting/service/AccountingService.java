@@ -31,18 +31,20 @@ public class AccountingService
     this.entryRepository = entryRepository;
   }
   
-  @Transactional
-  public long createAccount(Account account)
-  {
-    return accountRepository.createAccount(account);
-  }
-
+  
+  
   @Transactional
   public ArrayList<Account> getAllAccounts()
   {
     return accountRepository.getAllAccounts();
   }
     
+  @Transactional
+  public Account getAccountByNumber(String accountNumber)
+  {
+    return accountRepository.getAccount(accountNumber);
+  }
+  
   @Transactional
   public ArrayList<Entry> getAllEntries()
   {

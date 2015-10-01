@@ -3,6 +3,9 @@
  */
 package org.nano.ui.console;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import org.nano.accounting.model.Account;
@@ -27,7 +30,7 @@ public class Console
   public void start()
   {
     
-    Scanner scan = new Scanner(System.in);
+    scan = new Scanner(System.in);
  
     boolean quit = false;
     
@@ -52,6 +55,10 @@ public class Console
         case "quit":
           quit = true;
           System.out.println("\nBye.");
+          break;
+          
+        case "add entry":  
+          addEntry();
           break;
           
         default:
@@ -83,9 +90,9 @@ public class Console
     
     System.out.println("\n----- General Ledger -----\n");
 
-    String strHeader  = String.format("%-30s  %-50s  %-12s  %-12s  %-12s", "Nombre Cuenta", "Descripcion", "Debito", "Credito", "Saldo");
+    String strHeader  = String.format("%-10s  %-30s  %-50s  %-12s  %-12s  %-12s", "Date", "Nombre Cuenta", "Descripcion", "Debito", "Credito", "Saldo");
     System.out.println(strHeader);
-    strHeader = String.format("%30s  %50s  %12s  %12s  %12s", "------------------------------", "--------------------------------------------------", "------------", "------------", "------------");
+    strHeader = String.format("%10s  %30s  %50s  %12s  %12s  %12s", "----------", "------------------------------", "--------------------------------------------------", "------------", "------------", "------------");
     System.out.println(strHeader);
     System.out.println();
 
@@ -100,13 +107,13 @@ public class Console
       if (entry.getTrxType() == Entry.TYPE_DEBIT)
       {
         saldo -= entry.getAmount();
-        strEntry   = String.format("%-30s  %-50s  %12.2f  %12s  %12.2f", entry.getAccount().getName(), entry.getDescription(), entry.getAmount(), "", saldo);
+        strEntry   = String.format("%-10s  %-30s  %-50s  %12.2f  %12s  %12.2f", entry.getCreationDate(), entry.getAccount().getName(), entry.getDescription(), entry.getAmount(), "", saldo);
         
       }
       else
       {
         saldo += entry.getAmount();
-        strEntry   = String.format("%-30s  %-50s  %12s  %12.2f  %12.2f", entry.getAccount().getName(), entry.getDescription(), "", entry.getAmount(), saldo);
+        strEntry   = String.format("%-10s  %-30s  %-50s  %12s  %12.2f  %12.2f", entry.getCreationDate(), entry.getAccount().getName(), entry.getDescription(), "", entry.getAmount(), saldo);
       }
       
       System.out.println(strEntry);
@@ -128,4 +135,67 @@ public class Console
     System.out.println();
  }
   
+  private void addEntry()
+  {
+
+    Date creationDate = new Date();
+    int trxType = 0;
+    Account account;
+    double amount = 0;
+    String description = "";
+    
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+    System.out.println("\n --- Type new entry information --- \n");
+    
+    // *** Date ***
+    System.out.print("Date (dd/MM/yyyy): ");
+    String strDate = scan.next();
+    
+    if (!strDate.isEmpty())
+    {
+      try
+      {
+        creationDate = formatter.parse(strDate);
+      } 
+      catch (ParseException e)
+      {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      
+    }
+
+    
+    // *** Transaction Type ***
+    System.out.print("Transaction Type (1 - Credit, 2 - Debit): ");
+    trxType = scan.nextInt();
+    
+    // *** Account Oid ***
+    System.out.print("Account Number: ");
+    String accountNumber = scan.next();
+    account = accountingService.getAccountByNumber(accountNumber);
+    
+    // *** Amount ***
+    System.out.print("Amount (0.00): ");
+    amount = scan.nextDouble();
+    
+    // *** Description ***
+    System.out.print("Description: ");
+    description = scan.nextLine();
+    
+    
+    // ***** Save Entry to Database *****
+    Entry newEntry = new Entry();
+    newEntry.setCreationDate(creationDate);
+    newEntry.setTrxType(trxType);
+    newEntry.setAccount(account);
+    newEntry.setAmount(amount);
+    newEntry.setDescription(description);
+    
+    accountingService.saveEntry(newEntry);
+    
+    System.out.println("\nNew Entry was successfully created in the database.\n");
+    
+  }
 }
